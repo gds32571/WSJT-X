@@ -459,6 +459,26 @@ class WSJTX_WSPRDecode(WSJTX_Packet):
 
     def __init__(self, pkt, idx):
         WSJTX_Packet.__init__(self, pkt, idx)
+        New = False
+        Time = 0
+        snr = 0
+        DeltaTime = 0.0
+        Frequency = 0
+        self.Drift = 0
+        self.DXcall = ""
+        self.DXgrid = ""
+        self.Power =  0
+        
+    def Decode(self):
+        self.New = self.getBool()
+        self.Time = self.getuInt32()
+        self.snr = self.getInt32()
+        self.DeltaTime = self.getDouble()
+        self.Frequency = self.getLongLong()
+        self.Drift = self.getInt32()
+        self.DXcall = self.readutf8()
+        self.DXgrid = self.readutf8()
+        self.Power =  self.getuInt32()
 
 
 
